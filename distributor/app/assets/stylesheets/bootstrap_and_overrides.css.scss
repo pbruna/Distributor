@@ -1,0 +1,28 @@
+@import "bootstrap";
+
+@import "bootstrap-responsive";
+
+.navbar-inner {
+	border-radius: 1px;
+	.brand {
+		font-weight: bold;
+		font-size: 32px;
+	}
+	
+	#user-greet {
+		float: right;
+		margin-top: 25px;
+	}
+}
+
+#main {
+	.new-resource {
+		float: right;
+		margin-top: -50px;
+	}
+}
+
+#main.well {
+	background: white;
+	border: 1px solid #AAA;
+}

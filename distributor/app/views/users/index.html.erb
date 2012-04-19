@@ -1,0 +1,31 @@
+<div class="page-header">
+	<h1>Usuarios</h1>
+</div>
+<div class="new-resource">
+	<%= add_user_button %>
+</div>
+<div id="users">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Nombre</th>
+				<% if current_user.admin? %>
+					<th>Acciones</th>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users.each do |user| %>
+				<tr>
+					<td><%= user.email %></td>
+					<td><%= "#{user.first_name} #{user.last_name}"%></td>
+					<td>
+						<%= edit_user_button(user) %>
+						<%= delete_user_button(user) %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

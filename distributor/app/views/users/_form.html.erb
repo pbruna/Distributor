@@ -1,0 +1,15 @@
+<%= simple_form_for @user ,:html => {:class => 'form-horizontal'} do |f| %>
+	<fieldset>
+		<%= f.input :email, :required => true, :autofocus => true %>
+		<%= f.input :first_name %>
+		<%= f.input :last_name %>
+		<%= f.input :password, :required => true %>
+		<%= f.input :password_confirmation, :required => true %>
+		<%= f.input :admin %>
+	</fieldset>
+
+	<div class="form-actions">
+	    <%= f.button :submit, "Guardar", :class => "btn btn-primary" %>
+		<%= link_to "Cancelar", users_path, :class => "btn" %>
+	</div>
+<% end %>

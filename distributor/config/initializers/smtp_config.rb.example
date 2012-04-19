@@ -1,0 +1,11 @@
+Distributor::Application.config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+ActionMailer::Base.delivery_method = :smtp
+
+ActionMailer::Base.smtp_settings = {
+  :address        => "mail.example.com",
+  :port           => 587,
+  :domain         => "example.com",
+  :user_name      => "pbruna@example.com",
+  :password       => "super pass"
+}
