@@ -13,7 +13,7 @@ La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor
 * Se haya instalado el paquete __puppet__
 
 ### Configuración automática con puppet
-Una vez que se haya instalado puppet se debe copiar el contenido del directorio puppet en el directorio /etc/puppet. El directorio /etc/puppet debería tener el siguiente contenido:
+Se debe copiar el contenido del directorio [puppet](https://github.com/pbruna/Distributor/tree/master/puppet) en el directorio /etc/puppet. El directorio /etc/puppet debería tener el siguiente contenido:
 
 ```bash
 $ ls /etc/puppet/
