@@ -3,7 +3,7 @@
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
 
-## Instalación S.O.
+## Configuración S.O.
 
 
 ## Instalación de Distributor
@@ -58,15 +58,16 @@ production:
   socket: /var/lib/mysql/mysql.sock
 ```
 Más información sobre las opciones de configuración en http://bit.ly/JaFK4o
+
 Luego se debe crear la base de datos, pare ello ejecutar el siguiente comando desde el directorio raíz de la aplicación.
 
 ```bash
-RAILS_ENV=production rake db:create
+$ RAILS_ENV=production rake db:create
 ```
 
 ### Crear usuario de Administración
-Desde el directorio raíz de la aplicación ejecutar
+Desde el directorio raíz de la aplicación ejecutar el siguiente comando y seguir las instrucciones
 
 ```bash
-$ rake distributor:build_admin
-
+$ RAILS_ENV=production rake distributor:build_admin
+```
