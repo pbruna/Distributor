@@ -2,20 +2,20 @@
 
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
-## Instalación
 
-### Instalación S.O.
+## Instalación S.O.
 
-### Instalación de Distributor
+
+## Instalación de Distributor
 
 * Clonar con git
 * Instalar Gems con bundle
 
 
 
-### Configurando Distributor
+## Configurando Distributor
 
-#### Servidor STMP
+### Servidor STMP
 La configuración del servidor de correo se realiza en el archivo __config/initializers/smtp_config.rb__, se puede usar como base el archivo _config/initializers/smtp_config.rb.example_. Es necesario configurar al menos los siguientes parámetros:
 
 * Hostname del Servidor donde se instaló Distributor
@@ -42,3 +42,31 @@ Después modificar la dirección de correo del emisor de los correos editando el
 ```ruby
 config.mailer_sender = "distributor@example.com"
 ```
+
+### Configurar Base de Datos
+La configuración se realiza en el archivo __config/database.yml__
+
+```yaml
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: distributor_production
+  pool: 5
+  username: distributor
+  password:
+  socket: /var/lib/mysql/mysql.sock
+```
+Más información sobre las opciones de configuración en http://bit.ly/JaFK4o
+Luego se debe crear la base de datos, pare ello ejecutar el siguiente comando desde el directorio raíz de la aplicación.
+
+```bash
+RAILS_ENV=production rake db:create
+```
+
+### Crear usuario de Administración
+Desde el directorio raíz de la aplicación ejecutar
+
+```bash
+$ rake distributor:build_admin
+
