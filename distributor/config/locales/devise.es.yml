@@ -98,7 +98,7 @@ es:
         remember_me: "Recordarme"
         sign_in: "Acceder"
         username: "Nombre de usuario"
-      signed_in: "Accediste con éxito. A navegar libre..."
+      signed_in: "Ingresaste con éxito."
       signed_out: "Saliste con éxito."
     shared:
       links:

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module UsersHelper
 
   def add_user_button
@@ -14,7 +16,7 @@ module UsersHelper
   
   def delete_user_button(user)
     if current_user.admin?
-      link_to 'Eliminar', user_path(user), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+      link_to 'Eliminar', user_path(user), :method => :delete, :confirm => 'Está seguro?', :class => 'btn btn-mini btn-danger'
     end
   end
 

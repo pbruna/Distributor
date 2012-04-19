@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120418135244) do
+ActiveRecord::Schema.define(:version => 20120419222959) do
+
+  create_table "servers", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "ip_address", :null => false
+    t.string   "creator",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "servers", ["ip_address"], :name => "index_servers_on_ip_address", :unique => true
+  add_index "servers", ["name"], :name => "index_servers_on_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

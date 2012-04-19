@@ -46,3 +46,4 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'devise'
 gem "high_voltage"
+gem 'ipaddress'
