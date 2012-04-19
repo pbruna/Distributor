@@ -2,9 +2,20 @@
 
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
-## Configuración
+## Instalación
 
-### Servidor STMP
+### Instalación S.O.
+
+### Instalación de Distributor
+
+* Clonar con git
+* Instalar Gems con bundle
+
+
+
+### Configurando Distributor
+
+#### Servidor STMP
 La configuración del servidor de correo se realiza en el archivo __config/initializers/smtp_config.rb__, se puede usar como base el archivo _config/initializers/smtp_config.rb.example_. Es necesario configurar al menos los siguientes parámetros:
 
 * Hostname del Servidor donde se instaló Distributor
@@ -26,4 +37,8 @@ ActionMailer::Base.smtp_settings = {
 }
 ```
 
+Después modificar la dirección de correo del emisor de los correos editando el archivo __config/initializers/devise.rb__ 
 
+```ruby
+config.mailer_sender = "distributor@example.com"
+```
