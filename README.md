@@ -4,6 +4,13 @@ Distributor is a software developed with Rails for uploading and syncing files f
 
 
 ## Configuración S.O.
+Distributor esta certificado para ser ejecutado en sistemas operativos Red Hat Linux 6 o similares como CentOS y Oracle Linux.
+
+La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor espera que la configuración del Sistema Operativo:
+
+* Permita acceso HTTP/S hacia Internet, para instalación de dependencias.
+* Tenga configurado el repositorio EPEL - http://fedoraproject.org/wiki/EPEL/es
+* Se haya instalado el paquete puppet
 
 
 ## Instalación de Distributor
