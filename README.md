@@ -26,6 +26,7 @@ Posteriormente se debe aplicar la configuración del Sistema Operativo ejecutand
 $ puppet apply /etc/puppet/manifests/default.pp
 ```
 
+Este proceso puede demorar varios minutos, lo cual depende de la velocidad de acceso a Internet y la potencia del equipo.
 
 ## Instalación de Distributor
 
