@@ -10,7 +10,21 @@ La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor
 
 * Permita acceso HTTP/S hacia Internet, para instalación de dependencias.
 * Tenga configurado el repositorio EPEL - http://fedoraproject.org/wiki/EPEL/es
-* Se haya instalado el paquete puppet
+* Se haya instalado el paquete __puppet__
+
+### Configuración automática con puppet
+Una vez que se haya instalado puppet se debe copiar el contenido del directorio puppet en el directorio /etc/puppet. El directorio /etc/puppet debería tener el siguiente contenido:
+
+```bash
+$ ls /etc/puppet/
+auth.conf  manifests  modules  puppet.conf
+```
+
+Posteriormente se debe aplicar la configuración del Sistema Operativo ejecutando:
+
+```bash
+$ puppet apply /etc/puppet/manifests/default.pp
+```
 
 
 ## Instalación de Distributor
