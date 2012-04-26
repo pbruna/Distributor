@@ -101,5 +101,5 @@ $ RAILS_ENV=production rake distributor:build_admin
 Desde el directorio raíz de la aplicación ejecutar el siguiente comando, el cual creará llaves SSH para la conexión con los servidores de sincronización. **NO** usar __passphrases__
 
 ```bash
-$ RAILS_ENV=production rake distributor:build_admin
+$ RAILS_ENV=production rake distributor:create_ssh_key
 ```
