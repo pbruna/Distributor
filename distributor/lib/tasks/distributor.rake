@@ -3,7 +3,8 @@ namespace :distributor do
 
   desc "Create a SSH Key"
   task  :create_ssh_key => :environment do
-    system "ssh-keygen -q -f #{Rails.root.to_s}/public/distributor"
+    ssh_key_file = "#{APP_CONFIG['ssh_key_file_path']}/#{APP_CONFIG['ssh_key_file']}"
+    system "ssh-keygen -q -f #{Rails.root.to_s}/#{ssh_key_file}"
   end
 
   desc "Setup Admin User"

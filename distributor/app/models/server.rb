@@ -1,11 +1,11 @@
 class Server < ActiveRecord::Base
   
-  SERVER_ADDRESS = "192.168.168.3:3000"
-  CLIENT_USER = "distributor"
+  SERVER_ADDRESS = APP_CONFIG['server_address']
+  CLIENT_USER = APP_CONFIG['client_user']
   ADD_USER_COMMAND = "useradd -d /home/#{CLIENT_USER} -s /bin/bash -m #{CLIENT_USER}"
   MAKE_FILES_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir /home/#{CLIENT_USER}/FILES'"
   MAKE_SSH_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir /home/#{CLIENT_USER}/.ssh'"
-  GET_SSH_KEY_COMMAND = "su #{CLIENT_USER} -c 'curl http://#{SERVER_ADDRESS}/distributor.pub > /home/#{CLIENT_USER}/.ssh/authorized_keys'"
+  GET_SSH_KEY_COMMAND = "su #{CLIENT_USER} -c 'curl http://#{SERVER_ADDRESS}/#{APP_CONFIG['ssh_key_file']}.pub > /home/#{CLIENT_USER}/.ssh/authorized_keys'"
   
   attr_accessible :creator, :ip_address, :name, :active
   

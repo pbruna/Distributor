@@ -1,0 +1,11 @@
+development:
+    server_address: "192.168.168.3:3000"
+    client_user: "distributor"
+    ssh_key_file_path: "/public/"
+    ssh_key_file: "distributor"
+    
+production:
+    server_address: "192.168.168.3:3000"
+    client_user: "distributor"
+    ssh_key_file_path: "/public/"
+    ssh_key_file: "distributor"
