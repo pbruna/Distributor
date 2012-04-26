@@ -1,6 +1,11 @@
 # encoding: utf-8
 namespace :distributor do
 
+  desc "Create a SSH Key"
+  task  :create_ssh_key => :environment do
+    system "ssh-keygen -q -f #{Rails.root.to_s}/public/distributor"
+  end
+
   desc "Setup Admin User"
   task :build_admin => :environment do
     if User.are_any_admin?

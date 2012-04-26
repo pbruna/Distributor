@@ -1,6 +1,7 @@
 Vagrant::Config.run do |config|
   config.vm.box = "centos6"
   config.vm.forward_port 3000, 3000
+ # config.vm.network :bridged
   
   # Puppet
   config.vm.provision :puppet do |puppet| 

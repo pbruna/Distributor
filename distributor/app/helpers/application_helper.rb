@@ -12,6 +12,11 @@ module ApplicationHelper
     path = "edit_#{params[:controller].singularize}_path"
     button_link(:text => "Editar", :path => send(path, resource), :class => "btn btn-mini")
   end
+  
+  def show_resource_button(resource)
+    path = "#{params[:controller].singularize}_path"
+    button_link(:text => "Ver", :path => send(path, resource), :class => "btn btn-mini")
+  end
 
   def delete_resource_button(resource)
     path = "#{params[:controller].singularize}_path"

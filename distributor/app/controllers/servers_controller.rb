@@ -1,4 +1,8 @@
 class ServersController < ApplicationController
+
+  def show
+    @server = Server.find(params[:id])
+  end
   
   def index
     @servers = Server.all
@@ -16,7 +20,7 @@ class ServersController < ApplicationController
     @server = Server.new(params[:server])
     if @server.save
       flash[:notice]="Servidor creado correctamente"
-      redirect_to servers_path()
+      redirect_to server_path(@server)
     else
       flash[:error]="No fue posible agregar el servidor"
       render :action => "new"
@@ -27,7 +31,7 @@ class ServersController < ApplicationController
     @server = Server.find(params[:id])
     respond_to do |format|
       if @server.update_attributes(params[:server])
-        format.html {redirect_to servers_path(), :notice => "Servidor actualizado correctamente"}
+        format.html {redirect_to server_path(@server), :notice => "Servidor actualizado correctamente"}
         format.json {head :no_content}
       else
         flash[:error] = "No fue posible guardar los cambios"
