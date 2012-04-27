@@ -4,7 +4,7 @@ module ServersHelper
     if server.active?
       content_tag(:h2, content_tag(:span, "Activado!", :class => "label label-success"))
     else
-      link_to "#{content_tag(:li, '', :class => 'icon-off icon-white')} Activar".html_safe, activate_server_path(server),
+      link_to "#{content_tag(:li, '', :class => 'icon-off icon-white')} Activar".html_safe, edit_server_path(server, :activate => true),
         :class => "btn btn-primary"
     end
   end

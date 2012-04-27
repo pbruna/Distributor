@@ -2,7 +2,7 @@ class ServersController < ApplicationController
 
   def activate
     @server = Server.find(params[:id])
-    activate_result = @server.activate("root", "8944691")
+    activate_result = @server.activate(params[:username], params[:password])
     if !activate_result[:error]
       @server.active = true
       if @server.save
@@ -15,7 +15,7 @@ class ServersController < ApplicationController
     else
       @server.errors.add(:activate, activate_result[:message])
       flash[:error] = "No fue posible activar el servidor: #{activate_result[:message]}"
-      redirect_to server_path(@server)
+      redirect_to action: "edit", :activate => true
     end
   end
 

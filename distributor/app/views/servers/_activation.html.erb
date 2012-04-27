@@ -1,0 +1,12 @@
+<%= form_tag activate_server_path, {:class => "form-horizontal"} do %>
+  <fieldset>
+	<%= label_tag "Usuario" %>
+	<%= text_field_tag :username, "",:required => true, :placeholder => "root", :autofocus => true %>
+	<%= label_tag "Contraseña" %>
+	<%= password_field_tag :password, "", :required => true %>
+  </fieldset>
+	<div class="form-actions">
+	    <%= button_tag  "Activar", :class => "btn btn-primary" %>
+		<%= link_to "Cancelar", server_path(@server), :class => "btn" %>
+	</div>
+<% end -%>
