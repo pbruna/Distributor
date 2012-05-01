@@ -14,7 +14,7 @@ class Server < ActiveRecord::Base
   validates_uniqueness_of :ip_address, :message => "must be unique"
   validate :ip_address_must_be_valid
 
-
+# TODO: Ver que pasa si no hay conexión al sitio web
 # TODO: Refactor activate / deactivate methods
   def activate(user, password)
     return if active?
