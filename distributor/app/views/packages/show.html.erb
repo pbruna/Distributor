@@ -1,0 +1,58 @@
+<div class="page-header">
+	<h1><%= @package.name %></h1>
+</div>
+<div class="new-resource">
+	<%= link_to "#{content_tag(:li, '', :class => 'icon-download')} Descargar".html_safe, @package.file_url , :class => "btn" %>
+</div>
+<div id="description" class="row">
+	<div class="span5">
+		<dl class="dl-horizontal">
+			<dt>Archivo</dt>
+			<dd><%= link_to @package.file_name, @package.file_url  %></dd>
+			<dt>Descripción</dt>
+			<dd><%= @package.name %></dd>
+			<dt>Tipo</dt>
+			<dd><%= @package.content_type %></dd>
+			<dt>Tamaño</dt>
+			<dd><%= number_to_human_size(@package.size) %></dd>
+		</dl>
+	</div>
+	<div class="span4">
+		<dl class="dl-horizontal">
+			<dt>Creado</dt>
+			<dd><%= l @package.created_at, :format => :short %></dd>
+			<dt>Creado por</dt>
+			<dd><%= @package.creator %></dd>
+		</dl>
+	</div>
+</div>
+<div id="servers">
+	<div id="no_synced">
+		<div class="page-header">
+			<h3>Servidores no Sincronizados</h3>
+		</div>
+		<div class="new-resource">
+			<%= link_to "#{content_tag(:li, '', :class => 'icon-refresh')} Sincronizar".html_safe, @package.file_url , :class => "btn btn-small" %>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><%= check_box_tag ""%></th>
+					<th>Nombre</th>
+					<th>Dirección IP</th>
+					<th>Espacio Disponible</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @package.unsynced_servers.each do |server| %>
+					<tr>
+						<td><%= check_box_tag ""%></td>
+						<td><%= link_to server.name, server_path(server) %></td>
+						<td><%= server.ip_address %></td>
+						<td><%= number_to_human_size(server.free_space) %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

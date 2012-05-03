@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :admin, :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   # attr_accessible :title, :body
+  
+  has_many :packages
 
   def name
     "#{first_name} #{last_name}"

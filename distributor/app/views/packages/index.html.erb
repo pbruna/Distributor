@@ -1,0 +1,30 @@
+<div class="page-header">
+	<h1>Archivos</h1>
+</div>
+<div class="new-resource">
+	<%= add_resource_button("package", "icon-plus") %>
+</div>
+<div id="packages">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @packages.each do |package| %>
+				<tr>
+					<td><%= package.file_name %></td>
+					<td><%= package.name %></td>
+					<td>
+						<%= show_resource_button(package) %>
+						<%= edit_resource_button(package) %>
+						<%= delete_resource_button(package) %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

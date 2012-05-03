@@ -1,0 +1,14 @@
+<%= simple_form_for @package ,:html => {:class => 'form-horizontal', :multipart => true} do |f| %>
+	<fieldset>
+		<%= f.input :name, :label => "Descripción", :required => true, :autofocus => true %>
+		<%= f.input :file, :required => true, :as => :file %>
+		<%= f.hidden_field :file_cache %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+
+	</fieldset>
+
+	<div class="form-actions">
+	    <%= f.button :submit, "Subir", :class => "btn btn-primary" %>
+		<%= link_to "Cancelar", packages_path, :class => "btn" %>
+	</div>
+<% end %>

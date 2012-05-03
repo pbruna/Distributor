@@ -4,5 +4,57 @@
 <div class="new-resource">
 	<%= activate_server_button(@server) %>
 </div>
+<div id="description" class="row">
+	<div class="span5">
+		<dl class="dl-horizontal">
+			<dt>Nombre</dt>
+			<dd><%= @server.name %></dd>
+			<dt>Dirección IP</dt>
+			<dd><%= @server.ip_address %></dd>
+			<dt>Espacio Libre</dt>
+			<dd><%= number_to_human_size(@server.free_space) %></dd>
+		</dl>
+	</div>
+	<div class="span4">
+		<dl class="dl-horizontal">
+			<dt>Creado</dt>
+			<dd><%= l @server.created_at, :format => :short %></dd>
+			<dt>Creado por</dt>
+			<dd><%= @server.creator %></dd>
+		</dl>
+	</div>
+</div>
 <div id="files">
+	<div id="no_synced">
+		<div class="page-header">
+			<h3>Archivos no Sincronizados</h3>
+		</div>
+		<div class="new-resource">
+		<% if @server.active? %>
+				<%= link_to "#{content_tag(:li, '', :class => 'icon-refresh')} Sincronizar".html_safe, "" , :class => "btn btn-small" %>
+		<% else %>
+			<%= content_tag(:h2, content_tag(:span, "Activar para sincronizar archivos", :class => "label label-important"))%>
+		<% end %>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<% if @server.active? %><th><%= check_box_tag ""%></th><%end%>
+					<th>Nombre</th>
+					<th>Descripción</th>
+					<th>Tamaño</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @server.unsynced_packages.each do |package| %>
+					<tr>
+						<% if @server.active? %><td><%= check_box_tag ""%></td><%end%>
+						<td><%= link_to package.file_name, package_path(package) %></td>
+						<td><%= package.name %></td>
+						<td><%= number_to_human_size(package.size) %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 </div>

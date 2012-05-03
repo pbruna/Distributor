@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425135012) do
+ActiveRecord::Schema.define(:version => 20120503155422) do
+
+  create_table "packages", :force => true do |t|
+    t.string   "name"
+    t.string   "file"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "size"
+    t.string   "content_type"
+    t.integer  "user_id",      :null => false
+  end
+
+  create_table "packages_servers", :force => true do |t|
+    t.integer  "package_id"
+    t.integer  "server_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "packages_servers", ["server_id", "package_id"], :name => "index_packages_servers_on_server_id_and_package_id"
 
   create_table "servers", :force => true do |t|
     t.string   "name",                          :null => false

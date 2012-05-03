@@ -25,6 +25,20 @@
 		padding-bottom: 5px;
 	}
 	
+	.dl-horizontal {
+		dt {
+			text-align: left;
+		}
+	}
+	
+	#description {
+		margin-top: 0px;
+		margin-bottom: 20px;
+		border: solid 1px #AAA;
+		background: whiteSmoke;
+		margin-right: -20px;
+	}
+	
 }
 
 #main.well {

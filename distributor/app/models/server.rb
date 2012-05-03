@@ -14,8 +14,25 @@ class Server < ActiveRecord::Base
   validates_uniqueness_of :ip_address, :message => "must be unique"
   validate :ip_address_must_be_valid
 
-# TODO: Ver que pasa si no hay conexión al sitio web
-# TODO: Refactor activate / deactivate methods
+  has_and_belongs_to_many :packages
+
+
+  scope :active, where(:active => true)
+
+  def synced_packages
+    packages
+  end
+
+  def unsynced_packages
+    synced_ids = packages.map {|p| p.id}
+    all_packages_ids = Package.all.map {|p| p.id}
+    package_ids_to_search_for = all_packages_ids - synced_ids
+    Package.where(:id => package_ids_to_search_for)
+  end
+
+
+  # TODO: Ver que pasa si no hay conexión al sitio web
+  # TODO: Refactor activate / deactivate methods
   def activate(user, password)
     return if active?
     activate_result = nil
@@ -25,18 +42,22 @@ class Server < ActiveRecord::Base
       end
     rescue Errno::ETIMEDOUT => e
       activate_result = {:error => true, :message => e.message}
-    rescue Timeout::Error => e                       
+    rescue Timeout::Error => e
       activate_result = {:error => true, :message => e.message}
-    rescue Errno::EHOSTUNREACH => e                  
+    rescue Errno::EHOSTUNREACH => e
       activate_result = {:error => true, :message => e.message}
-    rescue Errno::ECONNREFUSED => e                  
+    rescue Errno::ECONNREFUSED => e
       activate_result = {:error => true, :message => e.message}
-    rescue Net::SSH::AuthenticationFailed => e       
+    rescue Net::SSH::AuthenticationFailed => e
       activate_result = {:error => true, :message => "Authentication failed"}
     end
     activate_result
   end
-  
+
+  def free_space
+    0
+  end
+
   def deactivate!(user, password)
     return unless active?
     activate_result = nil
@@ -46,13 +67,13 @@ class Server < ActiveRecord::Base
       end
     rescue Errno::ETIMEDOUT => e
       activate_result = {:error => true, :message => e.message}
-    rescue Timeout::Error => e                       
+    rescue Timeout::Error => e
       activate_result = {:error => true, :message => e.message}
-    rescue Errno::EHOSTUNREACH => e                  
+    rescue Errno::EHOSTUNREACH => e
       activate_result = {:error => true, :message => e.message}
-    rescue Errno::ECONNREFUSED => e                  
+    rescue Errno::ECONNREFUSED => e
       activate_result = {:error => true, :message => e.message}
-    rescue Net::SSH::AuthenticationFailed => e       
+    rescue Net::SSH::AuthenticationFailed => e
       activate_result = {:error => true, :message => "Authentication failed"}
     end
     if activate_result[:error]
@@ -63,7 +84,7 @@ class Server < ActiveRecord::Base
     end
   end
 
-  private  
+  private
     def ip_address_must_be_valid
       begin
         IPAddress.parse ip_address
@@ -100,8 +121,8 @@ class Server < ActiveRecord::Base
         end
       end
       ssh.loop
-      {:stdout => stdout_data, :message => stderr_data, 
-        :error => exit_code, :signal => exit_signal}
+      {:stdout => stdout_data, :message => stderr_data,
+       :error => exit_code, :signal => exit_signal}
     end
 
 end
