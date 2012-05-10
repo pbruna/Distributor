@@ -1,4 +1,5 @@
 Distributor::Application.routes.draw do
+  match "/packages/:id/sincronize" => "packages#sincronize", :as => "sincronize_package"
   match "/servers/:id/activate" => "servers#activate", :as => "activate_server"
   devise_for :users
   

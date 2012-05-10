@@ -32,6 +32,20 @@ class Package < ActiveRecord::Base
     server_ids_to_search_for = all_servers_ids - synced_ids
     Server.active.where(:id => server_ids_to_search_for)
   end
+  
+  def sync(servers = [])
+    servers = [servers] unless servers.class == Array
+    result = Hash.new
+    servers.each do |server|
+      begin
+        syncer = Distributor::Syncer.new(self,server)
+        result[server.id] = syncer.sync!
+      rescue Exception => e
+        raise e.message
+      end
+    end
+    result
+  end
 
 
   private

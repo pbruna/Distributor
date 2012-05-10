@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PackagesController < ApplicationController
   
   def index
@@ -14,6 +15,14 @@ class PackagesController < ApplicationController
   
   def new
     @package = Package.new
+  end
+  
+  def sincronize
+    @package = Package.find(params[:id])
+    servers = Server.where( :id => params[:servers].map {|s| s.to_i}).to_a
+    @package.delay.sync(servers)
+    flash[:notice] = "Ha comenzado la sincronización"
+    redirect_to package_path(@package)
   end
   
   def create

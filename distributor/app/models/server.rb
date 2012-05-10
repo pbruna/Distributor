@@ -2,11 +2,13 @@ class Server < ActiveRecord::Base
 
   SERVER_ADDRESS = APP_CONFIG['server_address']
   CLIENT_USER = APP_CONFIG['client_user']
+  CLIENT_DIRECTORY = APP_CONFIG['client_directory']
   ADD_USER_COMMAND = "useradd -d /home/#{CLIENT_USER} -s /bin/bash -m #{CLIENT_USER}"
   DEL_USER_COMMAND = "userdel -r -f #{CLIENT_USER}"
-  MAKE_FILES_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir /home/#{CLIENT_USER}/FILES'"
+  MAKE_FILES_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir /home/#{CLIENT_USER}/#{CLIENT_DIRECTORY}'"
   MAKE_SSH_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir /home/#{CLIENT_USER}/.ssh'"
   GET_SSH_KEY_COMMAND = "su #{CLIENT_USER} -c 'curl http://#{SERVER_ADDRESS}/#{APP_CONFIG['ssh_key_file']}.pub > /home/#{CLIENT_USER}/.ssh/authorized_keys'"
+  IDENTITY_FILE_PATH = "#{Rails.root}/#{APP_CONFIG['ssh_key_file_path']}/#{APP_CONFIG['ssh_key_file']}"
 
   attr_accessible :creator, :ip_address, :name, :active
 
