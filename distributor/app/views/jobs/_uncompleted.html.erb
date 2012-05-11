@@ -1,0 +1,27 @@
+<div id="uncompleted">
+	<div class="page-header">
+		<h3>Con errores</h3>
+	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Archivo</th>
+				<th>Servidor</th>
+				<th>Fecha</th>
+				<th>Quien</th>
+				<th>Mensaje de Error</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @uncompleted.each do |job| %>
+			<tr>
+				<td><%= job.package_name %></td>
+				<td><%= job.server_name %></td>
+				<td><%= l job.start_time, :format => :short %></td>
+				<td>Quien</td>
+				<td><%= job.error_message %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

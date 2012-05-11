@@ -3,6 +3,9 @@
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
 ## TODOS
+- En los jobs tengo que guardar quien lo encoló
+- A lo mejor tengo que poner otro id en los jobs para poder tratar de volver a ejecutarlo cuando falle || ver como re-ejecuto un trabajo cuando falle
+- Ver como se ven los trabajos ejecutándose
 - delayed_job -n 2 start // iniciar varios procesos
 
 ## Configuración S.O.

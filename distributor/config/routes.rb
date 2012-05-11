@@ -3,6 +3,7 @@ Distributor::Application.routes.draw do
   match "/servers/:id/activate" => "servers#activate", :as => "activate_server"
   devise_for :users
   
+  resources :jobs
   resources :packages
   resources :users
   resources :servers
