@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510014514) do
+ActiveRecord::Schema.define(:version => 20120510232004) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -28,6 +28,21 @@ ActiveRecord::Schema.define(:version => 20120510014514) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "package_id",                       :null => false
+    t.integer  "server_id",                        :null => false
+    t.integer  "process_id",                       :null => false
+    t.datetime "start_time",                       :null => false
+    t.datetime "finish_time"
+    t.boolean  "completed",     :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "error_message"
+  end
+
+  add_index "jobs", ["package_id"], :name => "index_jobs_on_package_id"
+  add_index "jobs", ["server_id"], :name => "index_jobs_on_server_id"
 
   create_table "packages", :force => true do |t|
     t.string   "name"

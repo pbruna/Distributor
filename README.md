@@ -2,6 +2,8 @@
 
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
+## TODOS
+- delayed_job -n 2 start // iniciar varios procesos
 
 ## Configuración S.O.
 Distributor esta certificado para ser ejecutado en sistemas operativos Red Hat Linux 6 o similares como CentOS y Oracle Linux.
@@ -103,3 +105,4 @@ Desde el directorio raíz de la aplicación ejecutar el siguiente comando, el cu
 ```bash
 $ RAILS_ENV=production rake distributor:create_ssh_key
 ```
+

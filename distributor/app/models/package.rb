@@ -33,13 +33,17 @@ class Package < ActiveRecord::Base
     Server.active.where(:id => server_ids_to_search_for)
   end
   
+  def has_unsynced_servers?
+    unsynced_servers.size > 0
+  end
+  
   def sync(servers = [])
     servers = [servers] unless servers.class == Array
     result = Hash.new
     servers.each do |server|
       begin
         syncer = Distributor::Syncer.new(self,server)
-        result[server.id] = syncer.sync!
+        result[server.id] = syncer.delay.sync!
       rescue Exception => e
         raise e.message
       end

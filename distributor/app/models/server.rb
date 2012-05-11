@@ -5,10 +5,11 @@ class Server < ActiveRecord::Base
   CLIENT_DIRECTORY = APP_CONFIG['client_directory']
   ADD_USER_COMMAND = "useradd -d /home/#{CLIENT_USER} -s /bin/bash -m #{CLIENT_USER}"
   DEL_USER_COMMAND = "userdel -r -f #{CLIENT_USER}"
-  MAKE_FILES_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir /home/#{CLIENT_USER}/#{CLIENT_DIRECTORY}'"
+  MAKE_FILES_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir -p #{CLIENT_DIRECTORY}'"
   MAKE_SSH_DIR_COMMAND = "su #{CLIENT_USER} -c 'mkdir /home/#{CLIENT_USER}/.ssh'"
   GET_SSH_KEY_COMMAND = "su #{CLIENT_USER} -c 'curl http://#{SERVER_ADDRESS}/#{APP_CONFIG['ssh_key_file']}.pub > /home/#{CLIENT_USER}/.ssh/authorized_keys'"
   IDENTITY_FILE_PATH = "#{Rails.root}/#{APP_CONFIG['ssh_key_file_path']}/#{APP_CONFIG['ssh_key_file']}"
+  SET_PERMISSIONS = "chmod 755 /home/distributor/.ssh/ && chmod 644 /home/distributor/.ssh/authorized_keys "
 
   attr_accessible :creator, :ip_address, :name, :active
 
@@ -31,6 +32,10 @@ class Server < ActiveRecord::Base
     package_ids_to_search_for = all_packages_ids - synced_ids
     Package.where(:id => package_ids_to_search_for)
   end
+  
+  def has_unsynced_packages?
+    unsynced_packages.size > 0
+  end
 
 
   # TODO: Ver que pasa si no hay conexión al sitio web
@@ -40,7 +45,7 @@ class Server < ActiveRecord::Base
     activate_result = nil
     begin
       Net::SSH::start(ip_address, user, {:password => password, :timeout => 5}) do |ssh|
-        activate_result = ssh_exec! ssh, "#{ADD_USER_COMMAND} && #{MAKE_FILES_DIR_COMMAND} && #{MAKE_SSH_DIR_COMMAND} && #{GET_SSH_KEY_COMMAND}"
+        activate_result = ssh_exec! ssh, "#{ADD_USER_COMMAND} && #{MAKE_FILES_DIR_COMMAND} && #{MAKE_SSH_DIR_COMMAND} && #{GET_SSH_KEY_COMMAND} && #{SET_PERMISSIONS}"
       end
     rescue Errno::ETIMEDOUT => e
       activate_result = {:error => true, :message => e.message}

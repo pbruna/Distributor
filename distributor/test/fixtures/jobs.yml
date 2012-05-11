@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  package_id: 1
+  server_id: 1
+  process_id: 1
+  start_time: 2012-05-10 13:16:39
+  finish_time: 2012-05-10 13:16:39
+  completed: false
+
+two:
+  package_id: 1
+  server_id: 1
+  process_id: 1
+  start_time: 2012-05-10 13:16:39
+  finish_time: 2012-05-10 13:16:39
+  completed: false

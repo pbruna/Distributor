@@ -1,18 +1,34 @@
 module Distributor
   class Syncer
+    TIME_OUT = 30
     attr_accessor :package, :server, :sync_command
-  
+
     def initialize(package, server)
       @package = package
       @server = server
-      @sync_command = "rsync -az -e 'ssh -i #{Server::IDENTITY_FILE_PATH} -o ConnectTimeout=10' --partial"
+      @sync_command = "rsync -az  --timeout=30 -e 'ssh -i #{Server::IDENTITY_FILE_PATH} -o ConnectTimeout=30' --partial"
     end
-  
+
     def sync!
       return false unless server.active?
-      system("#{sync_command} #{package.full_path} #{Server::CLIENT_USER}@#{server.ip_address}:#{Server::CLIENT_DIRECTORY}")
-      return $? # Variable que tiene el resultado del comando anterior
+      start_time = Time.now
+      #pid = spawn("#{sync_command} #{package.full_path} #{Server::CLIENT_USER}@#{server.ip_address}:#{Server::CLIENT_DIRECTORY}")
+      pid, stdin, stdout, stderr = Open4.popen4("#{sync_command} #{package.full_path} #{Server::CLIENT_USER}@#{server.ip_address}:#{Server::CLIENT_DIRECTORY}")
+      stdin.close
+      out, err = [stdout, stderr].map {|p| begin p.read ensure p.close end}
+      job = Job.create(
+        :package_id => @package.id,
+        :server_id => @server.id,
+        :process_id => pid,
+        :start_time => start_time
+      )
+      Process.waitpid(pid)
+      process_status = $? # Variable que tiene el resultado del comando anterior
+      job.finish_time = Time.now
+      job.completed = process_status.exitstatus > 0 ? false : true
+      job.error_message = err
+      job.save
     end
-  
+
   end
 end
