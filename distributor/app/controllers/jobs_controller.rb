@@ -2,8 +2,12 @@ class JobsController < ApplicationController
   
   def index
     @running = Job.running
-    @uncompleted = Job.uncompleted
-    @recent = Job.recent
+    @uncompleted = Job.uncompleted.reverse
+    @recent = Job.recent.reverse
+  end
+  
+  def show
+    @job = Job.find(params[:id])
   end
   
 end

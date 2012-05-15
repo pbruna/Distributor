@@ -1,6 +1,6 @@
-<div id="uncompleted">
+<div id="completed">
 	<div class="page-header">
-		<h3>Con errores</h3>
+		<h3>Completados <small>(Últimos 10)</small></h3>
 	</div>
 	<table class="table table-striped">
 		<thead>
@@ -9,11 +9,10 @@
 				<th>Servidor</th>
 				<th>Fecha</th>
 				<th>Responsable</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			<% @uncompleted.each do |job| %>
+			<% @recent.each do |job| %>
 			<tr>
 				<td><%= job.package_name %></td>
 				<td><%= job.server_name %></td>

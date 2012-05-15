@@ -192,6 +192,7 @@ es_CL:
       default: ! '%A, %d de %B de %Y %H:%M:%S %z'
       long: ! '%A %d de %B de %Y %H:%M'
       short: ! '%d de %b %H:%M'
+      day_month: ! '%d de %b'
     pm: pm
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:

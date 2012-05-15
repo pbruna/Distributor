@@ -10,4 +10,17 @@ module JobsHelper
     render :partial => "uncompleted"
   end
   
+  def render_completed
+    return if @recent.size < 1
+    render :partial => "completed"
+  end
+  
+  def format_error_message(message)
+    return "No se registraron errores" if message.nil?
+    messages = message.split(/\n/)
+    content_tag :ul do
+      messages.reduce('') {|c,msg| c << content_tag(:li, msg)}.html_safe
+    end
+  end
+  
 end

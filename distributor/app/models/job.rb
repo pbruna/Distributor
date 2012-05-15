@@ -6,9 +6,20 @@ class Job < ActiveRecord::Base
   
   after_update :mark_package_as_synced
   
-  
+  def running?
+    finish_time.nil?
+  end
+
   def server_name
     server.name
+  end
+  
+  def file_name
+    package.file_name
+  end
+  
+  def file_url
+    package.file_url
   end
   
   def user_name
@@ -20,8 +31,13 @@ class Job < ActiveRecord::Base
     package.file_name
   end
   
+  def duration
+    return if finish_time.nil?
+    finish_time.to_time - start_time.to_time
+  end
+  
   scope :running, where(:finish_time => nil)
-  scope :recent, where(Job.arel_table[:finish_time].not_eq(nil), :completed => true)
+  scope :recent, where(:completed => true).order("id desc").limit(10)
   scope :uncompleted, where(Job.arel_table[:finish_time].not_eq(nil), :completed => false)
   
   private

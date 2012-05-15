@@ -1,30 +1,34 @@
 # encoding: utf-8
 class PackagesController < ApplicationController
-  
+
   def index
     @packages = Package.all
   end
-  
+
   def show
     @package = Package.find(params[:id])
   end
-  
+
   def edit
     @package = Package.find(params[:id])
   end
-  
+
   def new
     @package = Package.new
   end
-  
+
   def sincronize
     @package = Package.find(params[:id])
-    servers = Server.where( :id => params[:servers].map {|s| s.to_i}).to_a
-    @package.sync(current_user.id, servers)
-    flash[:notice] = "Ha comenzado la sincronización"
-    redirect_to package_path(@package)
+    if params[:servers].nil?
+      redirect_to package_path(@package)
+    else
+      servers = Server.where( :id => params[:servers].map {|s| s.to_i}).to_a
+      @package.sync(current_user.id, servers, params[:job_id])
+      flash[:notice] = "Ha comenzado la sincronización"
+      redirect_to package_path(@package)
+    end
   end
-  
+
   def create
     @package = Package.new(params[:package])
     if @package.save
@@ -33,9 +37,9 @@ class PackagesController < ApplicationController
     else
       flash[:error]="No fue posible subir el archivo"
       render :action => "new"
-    end    
+    end
   end
-  
+
   def update
     @package = Package.find(params[:id])
     respond_to do |format|
@@ -49,7 +53,7 @@ class PackagesController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     @package = Package.find(params[:id])
     respond_to do |format|
@@ -63,5 +67,5 @@ class PackagesController < ApplicationController
       end
     end
   end
-  
+
 end
