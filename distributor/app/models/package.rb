@@ -37,12 +37,12 @@ class Package < ActiveRecord::Base
     unsynced_servers.size > 0
   end
   
-  def sync(servers = [])
+  def sync(user, servers = [])
     servers = [servers] unless servers.class == Array
     result = Hash.new
     servers.each do |server|
       begin
-        syncer = Distributor::Syncer.new(self,server)
+        syncer = Distributor::Syncer.new(self,server,user)
         result[server.id] = syncer.delay.sync!
       rescue Exception => e
         raise e.message

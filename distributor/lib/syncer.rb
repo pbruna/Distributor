@@ -3,9 +3,10 @@ module Distributor
     TIME_OUT = 30
     attr_accessor :package, :server, :sync_command
 
-    def initialize(package, server)
+    def initialize(package, server, user_id)
       @package = package
       @server = server
+      @user_id = user_id
       @sync_command = "rsync -az  --timeout=30 -e 'ssh -i #{Server::IDENTITY_FILE_PATH} -o ConnectTimeout=30' --partial"
     end
 
@@ -20,7 +21,8 @@ module Distributor
         :package_id => @package.id,
         :server_id => @server.id,
         :process_id => pid,
-        :start_time => start_time
+        :start_time => start_time,
+        :user_id => @user_id
       )
       Process.waitpid(pid)
       process_status = $? # Variable que tiene el resultado del comando anterior

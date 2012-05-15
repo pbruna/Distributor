@@ -18,7 +18,7 @@
 				<td><%= job.package_name %></td>
 				<td><%= job.server_name %></td>
 				<td><%= l job.start_time, :format => :short %></td>
-				<td>Quien</td>
+				<td><%= job.user_name %></td>
 				<td><%= job.error_message %></td>
 			</tr>
 			<% end %>

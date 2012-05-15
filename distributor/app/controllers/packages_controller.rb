@@ -20,7 +20,7 @@ class PackagesController < ApplicationController
   def sincronize
     @package = Package.find(params[:id])
     servers = Server.where( :id => params[:servers].map {|s| s.to_i}).to_a
-    @package.sync(servers)
+    @package.sync(current_user.id, servers)
     flash[:notice] = "Ha comenzado la sincronización"
     redirect_to package_path(@package)
   end

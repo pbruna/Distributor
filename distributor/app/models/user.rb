@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   
   has_many :packages
+  has_many :jobs
 
   def name
     "#{first_name} #{last_name}"

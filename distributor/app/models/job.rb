@@ -1,13 +1,19 @@
 class Job < ActiveRecord::Base
-  attr_accessible :completed, :finish_time, :package_id, :process_id, :server_id, :start_time
+  attr_accessible :completed, :finish_time, :package_id, :process_id, :server_id, :start_time, :user_id
   belongs_to :server
   belongs_to :package
+  belongs_to :user
   
   after_update :mark_package_as_synced
   
   
   def server_name
     server.name
+  end
+  
+  def user_name
+    return "" if user.nil?
+    user.name
   end
   
   def package_name
