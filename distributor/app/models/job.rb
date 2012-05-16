@@ -10,6 +10,11 @@ class Job < ActiveRecord::Base
     "20%"
   end
   
+  def mark_as_running!
+    self.finish_time = nil
+    save
+  end
+  
   def running?
     finish_time.nil?
   end

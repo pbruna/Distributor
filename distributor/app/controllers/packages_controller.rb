@@ -24,8 +24,15 @@ class PackagesController < ApplicationController
     else
       servers = Server.where( :id => params[:servers].map {|s| s.to_i}).to_a
       @package.sync(current_user.id, servers, params[:job_id])
-      flash[:notice] = "Ha comenzado la sincronización"
-      redirect_to package_path(@package)
+      if params[:job_id].nil?
+        flash[:notice] = "Ha comenzado la sincronización"
+        redirect_to package_path(@package)
+      else
+        flash[:notice] = "Se ha ejecutado nuevamente!"
+        job = Job.find(params[:job_id])
+        job.mark_as_running!
+        redirect_to job_path(job)
+      end
     end
   end
 
