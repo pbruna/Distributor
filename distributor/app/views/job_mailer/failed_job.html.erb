@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+	<h1>El trabajo ha fallado</h1>
+	<p>La sincronización del archivo <%= @package.file_name %> con el servidor <%= @server.name %> no se pudo completar.<br/>
+	Puede obtener más información en: <%= link_to job_url(@job), job_url(@job) %>
+	</p>
+  </body>
+</html>

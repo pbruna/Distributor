@@ -3,11 +3,11 @@
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
 ## TODOS
-- Enviar correo cuando termine el trabajo si fallo
 - Mostrar progreso cuando el trabajo esta en ejecucion
 - Mejorar el diseño del index de los trabajos
 - Barra de Progreso cuando se carga archivo
 - Barra de Progreso cuando se activa servidor
+- Mejorar el Look del correo enviado
 - delayed_job -n 2 start // iniciar varios procesos
 
 ## Configuración S.O.
