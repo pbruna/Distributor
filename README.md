@@ -3,10 +3,16 @@
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
 ## TODOS
+- Documentar instalación y configuración:
+* passenger
+* compilar assets
+* configurar servidor de correo
+* inicio automático de delayed_job con varios procesos (-n 10)
+
 - Barra de Progreso cuando se carga archivo
 - Barra de Progreso cuando se activa servidor
 - Mejorar el Look del correo enviado
-- delayed_job -n 2 start // iniciar varios procesos
+
 
 ## Configuración S.O.
 Distributor esta certificado para ser ejecutado en sistemas operativos Red Hat Linux 6 o similares como CentOS y Oracle Linux.
