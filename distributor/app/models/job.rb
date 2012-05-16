@@ -7,7 +7,10 @@ class Job < ActiveRecord::Base
   after_update :mark_package_as_synced
   
   def progress
-    "20%"
+    current_bytes = read_info_from_proc_file(process_id)
+    total_bytes = package.size
+    transfer_percent = (100 * current_bytes) / total_bytes
+    "#{transfer_percent}%"
   end
   
   def mark_as_running!
@@ -59,6 +62,15 @@ class Job < ActiveRecord::Base
     package = Package.find(self.package_id)
     server = Server.find(self.server_id)
     package.servers << server
+  end
+  
+  def read_info_from_proc_file(proc_id)
+    file = "/proc/#{proc_id}/io"
+    begin
+      File.open(file).grep(/wchar/)[0].split(": ")[1].gsub(/\n/,"").to_i
+    rescue Exception => e
+      return 0
+    end
   end
   
 end

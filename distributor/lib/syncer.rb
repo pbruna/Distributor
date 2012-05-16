@@ -16,8 +16,9 @@ module Distributor
       start_time = Time.now
       pid, stdin, stdout, stderr = Open4.popen4("#{sync_command} #{package.full_path} #{Server::CLIENT_USER}@#{server.ip_address}:#{Server::CLIENT_DIRECTORY}")
       stdin.close
-      out, err = [stdout, stderr].map {|p| begin p.read ensure p.close end}
       job = buil_job(pid, start_time)
+      job.save
+      out, err = [stdout, stderr].map {|p| begin p.read ensure p.close end}
       Process.waitpid(pid)
       process_status = $? # Variable que tiene el resultado del comando anterior
       job.finish_time = Time.now
