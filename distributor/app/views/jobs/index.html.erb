@@ -1,6 +1,27 @@
 <div class="page-header">
 	<h1>Trabajos</h1>
 </div>
-<%= render_running %>
-<%= render_uncompleted %>
-<%= render_completed %>
+
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#recent" data-toggle="tab">Terminados</a></li>
+		<li><a href="#running" data-toggle="tab">Ejecutando</a></li>
+		<li><a href="#uncompleted" data-toggle="tab">Fallaron</a></li>
+	</ul>
+
+	<div class="tab-content">
+		<div class="tab-pane active" id="recent">
+			<%= render_completed %>
+		</div>
+
+		<div class="tab-pane" id="running">
+			<%= render_running %>
+		</div>
+
+
+		<div class="tab-pane" id="uncompleted">
+			<%= render_uncompleted %>
+		</div>
+		
+	</div>
+</div>
