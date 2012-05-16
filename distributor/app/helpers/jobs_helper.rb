@@ -23,4 +23,9 @@ module JobsHelper
     end
   end
   
+  def job_duration_time(job)
+    return "" if job.running?
+    distance_of_time_in_words(@job.start_time, @job.finish_time, :include_seconds => true)
+  end
+  
 end

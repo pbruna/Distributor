@@ -1,0 +1,27 @@
+<div id="running">
+	<div class="page-header">
+		<h3>Corriendo</h3>
+	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Archivo</th>
+				<th>Servidor</th>
+				<th>Fecha</th>
+				<th>Responsable</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @running.each do |job| %>
+			<tr>
+				<td><%= job.package_name %></td>
+				<td><%= job.server_name %></td>
+				<td><%= l job.start_time, :format => :day_month %></td>
+				<td><%= job.user_name %></td>
+				<td><%= show_resource_button(job)%></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

@@ -19,15 +19,12 @@
 			<dt>Terminado</dt>
 			<dd><%= @job.finish_time %></dd>
 			<dt>Duración</dt>
-			<dd><%= distance_of_time_in_words(@job.start_time, @job.finish_time, :include_seconds => true) %></dd>
+			<dd><%= job_duration_time(@job) %></dd>
 		</dl>
 	</div>
 </div>
-<div class="alert alert-error">
-	<h4 class="alert-heading">Ocurrió el siguiente error</h4>
-	<br>
-	<p><%= format_error_message(@job.error_message) %></p>
-	<div style="margin: 20px auto 20px auto; width: 150px">
-		<%= link_to "#{content_tag(:li, '', :class => 'icon-refresh')} Sincronizar".html_safe, sincronize_package_path(@job.package.id, :servers => [@job.server.id], :job_id => @job.id) , :class => "btn" %>
-	</div>
-</div>
+<% if @job.uncompleted? %>
+	<%= render :partial => 'uncompleted_information' %>
+<% elsif @job.running? %>
+	<%= render :partial => 'running_information' %>
+<% end %>

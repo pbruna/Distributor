@@ -3,7 +3,6 @@
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
 ## TODOS
-- Vista de Trabajo en Ejecucion
 - Cuando se vuelva a ejecutar el trabajo, debe redirigir a la pagina del trabajo
 - Enviar correo cuando termine el trabajo si fallo
 - Mostrar progreso cuando el trabajo esta en ejecucion

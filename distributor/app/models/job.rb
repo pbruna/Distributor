@@ -6,8 +6,16 @@ class Job < ActiveRecord::Base
   
   after_update :mark_package_as_synced
   
+  def progress
+    "20%"
+  end
+  
   def running?
     finish_time.nil?
+  end
+  
+  def uncompleted?
+    !finish_time.nil? && !completed?
   end
 
   def server_name
