@@ -3,14 +3,11 @@
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
 ## TODOS
-- Documentar instalación y configuración:
 * inicio automático de delayed_job con varios procesos (-n 10) con monit
 * Traducir mensajes FLASH que faltan
-
 - Barra de Progreso cuando se carga archivo
 - Barra de Progreso cuando se activa servidor
 - Mejorar el Look del correo enviado
-
 
 ## Configuración S.O.
 Distributor esta certificado para ser ejecutado en sistemas operativos Red Hat Linux 6 o similares como CentOS y Oracle Linux.
@@ -124,4 +121,11 @@ Se deben compilar los archivos CSS y Javascript, para ello ejecutar
 ```bash
 $ RAILS_ENV=production rake assets:clean
 $ RAILS_ENV=production rake assets:precompile
+```
+
+### Iniciar Pool de Trabajos
+Este es el demonio que se encarga de realizar las tareas de sincronización:
+
+```bash
+$ RAILS_ENV=production script/delayed_job -n 10 start
 ```

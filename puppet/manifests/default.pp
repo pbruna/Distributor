@@ -93,6 +93,10 @@ class os {
 		ensure => installed,
 	}
 	
+	package { "monit":
+		ensure => installed,
+	}
+	
 	file { "/etc/hosts":
 		ensure => file,
 		owner => 'root',
