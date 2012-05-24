@@ -39,6 +39,7 @@ class httpd {
 		owner => 'root',
 		group => 'root',
 		source => "/etc/puppet/modules/apache/files/distributor.conf",
+		require => Package["httpd"],
 		notify => Service["httpd"]
 	}
 	
@@ -48,6 +49,7 @@ class httpd {
 		owner => 'root',
 		group => 'root',
 		source => "/etc/puppet/modules/apache/files/httpd.conf",
+		require => Package["httpd"],
 		notify => Service["httpd"]
 	}
 	
