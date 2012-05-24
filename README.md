@@ -17,7 +17,7 @@ La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor
 * Permita acceso HTTP/S hacia Internet, para instalación de dependencias.
 * Tenga configurado el repositorio EPEL - http://fedoraproject.org/wiki/EPEL/es
 * Configurar el repositorio de NODEJS 
-```bash
+```
 rpm -ivh http://nodejs.tchol.org/repocfg/el/nodejs-stable-release.noarch.rpm
 ```
 * Se haya instalado el paquete __puppet__
