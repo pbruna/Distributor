@@ -8,6 +8,7 @@ Distributor is a software developed with Rails for uploading and syncing files f
 * passenger
 * compilar assets
 * configurar servidor de correo
+* Traducir mensajes FLASH que faltan
 * inicio automático de delayed_job con varios procesos (-n 10)
 
 - Barra de Progreso cuando se carga archivo
