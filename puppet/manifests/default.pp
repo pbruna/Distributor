@@ -79,6 +79,10 @@ class os {
 		ensure => present,
 	}
 	
+	package {"nodejs":
+		ensure => present
+	}
+	
 	package { "git":
 		ensure => installed,
 	}
