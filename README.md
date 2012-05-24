@@ -19,7 +19,7 @@ La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor
 * Se haya instalado el paquete __puppet__
 
 ### Descargar Distributor
-Se debe descargar el archivo zip y luego descomprimirlo.
+Se debe [descargar el archivo zip](https://github.com/pbruna/Distributor/zipball/master) y luego descomprimirlo.
 La carpeta resultante tendrá dos directorios:
 
 * __distributor/__ : es el directorio de la aplicación y su contenido debe ser copiado, con __rsync__, en /var/www/distributor. El usuario y grupo apache deben ser propietarios del directorio, y
