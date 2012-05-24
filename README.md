@@ -3,7 +3,6 @@
 Distributor is a software developed with Rails for uploading and syncing files from a central server to remote locations.
 
 ## TODOS
-- Sincronizar archivos desde Servidores
 - Documentar instalación y configuración:
 * passenger
 * compilar assets
