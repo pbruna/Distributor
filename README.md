@@ -17,6 +17,7 @@ La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor
 * Permita acceso HTTP/S hacia Internet, para instalación de dependencias.
 * Tenga configurado el repositorio EPEL - http://fedoraproject.org/wiki/EPEL/es
 * Se haya instalado el paquete __puppet__
+* Configurar SELinux en modo permissive
 
 ### Descargar Distributor
 Se debe [descargar el archivo zip](https://github.com/pbruna/Distributor/zipball/master) y luego descomprimirlo.
