@@ -4,10 +4,8 @@ Distributor is a software developed with Rails for uploading and syncing files f
 
 ## TODOS
 - Documentar instalación y configuración:
-* compilar assets
-* configurar servidor de correo
+* inicio automático de delayed_job con varios procesos (-n 10) con monit
 * Traducir mensajes FLASH que faltan
-* inicio automático de delayed_job con varios procesos (-n 10)
 
 - Barra de Progreso cuando se carga archivo
 - Barra de Progreso cuando se activa servidor
@@ -27,7 +25,7 @@ La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor
 Se debe descargar el archivo zip y luego descomprimirlo.
 La carpeta resultante tendrá dos directorios:
 
-* __distributor/__ : es el directorio de la aplicación y su contenido debe ser copiado, con __rsync__, en /var/www/distributor, y
+* __distributor/__ : es el directorio de la aplicación y su contenido debe ser copiado, con __rsync__, en /var/www/distributor. El usuario y grupo apache deben ser propietarios del directorio, y
 
 * __puppet__/ : que contiene la configuración automática y su contenido debe ser copiado en /etc/puppet
 
@@ -45,19 +43,16 @@ Posteriormente se debe aplicar la configuración del Sistema Operativo ejecutand
 $ puppet apply /etc/puppet/manifests/default.pp
 ```
 
-#### TODO: Configuracion en Puppet de Postfix y Apache
-
-
 Este proceso puede demorar varios minutos, lo cual depende de la velocidad de acceso a Internet y la potencia del equipo.
 
-## Instalación de Distributor
-
-* Clonar con git
-* Instalar Gems con bundle
-
-
-
 ## Configurando Distributor
+
+### Instalar Dependencias
+Dentro del directorio de la aplicación (/var/www/distributor), se debe ejecutar el comando __bundle__
+
+```bash
+$ bundle install
+```
 
 ### Servidor STMP
 La configuración del servidor de correo se realiza en el archivo __config/initializers/smtp_config.rb__, se puede usar como base el archivo _config/initializers/smtp_config.rb.example_. Es necesario configurar al menos los siguientes parámetros:
@@ -123,3 +118,10 @@ Desde el directorio raíz de la aplicación ejecutar el siguiente comando, el cu
 $ RAILS_ENV=production rake distributor:create_ssh_key
 ```
 
+### Compilar Assets
+Se deben compilar los archivos CSS y Javascript, para ello ejecutar
+
+```bash
+$ RAILS_ENV=production rake assets:clean
+$ RAILS_ENV=production rake assets:precompile
+```
