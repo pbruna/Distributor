@@ -101,7 +101,7 @@ Más información sobre las opciones de configuración en http://bit.ly/JaFK4o
 Luego se debe crear la base de datos, pare ello ejecutar el siguiente comando desde el directorio raíz de la aplicación.
 
 ```bash
-$ RAILS_ENV=production rake db:create
+$ RAILS_ENV=production rake db:setup
 ```
 
 ### Crear usuario de Administración
