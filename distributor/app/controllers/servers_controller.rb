@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ServersController < ApplicationController
 
   def activate
@@ -19,22 +20,38 @@ class ServersController < ApplicationController
     end
   end
 
+  def sincronize
+    @server = Server.find(params[:id])
+    if params[:packages].nil?
+      redirect_to server_path(@server)
+    else
+      packages = Package.where( :id => params[:packages].map {|s| s.to_i}).to_a
+      packages.each do |package|
+        package.sync(current_user.id, @server)
+      end
+      
+      flash[:notice] = "Ha comenzado la sincronización"
+      redirect_to server_path(@server)
+      
+    end
+  end
+
   def show
     @server = Server.find(params[:id])
   end
-  
+
   def index
     @servers = Server.all
   end
-  
+
   def edit
     @server = Server.find(params[:id])
   end
-  
+
   def new
     @server = Server.new
   end
-  
+
   def create
     @server = Server.new(params[:server])
     if @server.save
@@ -43,9 +60,9 @@ class ServersController < ApplicationController
     else
       flash[:error]="No fue posible agregar el servidor"
       render :action => "new"
-    end    
+    end
   end
-  
+
   def update
     @server = Server.find(params[:id])
     respond_to do |format|
@@ -59,7 +76,7 @@ class ServersController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     @server = Server.find(params[:id])
     respond_to do |format|
@@ -73,5 +90,5 @@ class ServersController < ApplicationController
       end
     end
   end
-  
+
 end

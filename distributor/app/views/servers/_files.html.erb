@@ -1,32 +1,37 @@
-<div id="no_synced">
-	<div class="page-header">
-		<h3>Archivos no Sincronizados</h3>
-	</div>
-	<div class="new-resource">
-	<% if @server.active? %>
-			<%= link_to "#{content_tag(:li, '', :class => 'icon-refresh')} Sincronizar".html_safe, "" , :class => "btn btn-small" %>
-	<% else %>
-		<%= content_tag(:h2, content_tag(:span, "Activar para sincronizar archivos", :class => "label label-important"))%>
-	<% end %>
-	</div>
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<% if @server.active? %><th><%= check_box_tag ""%></th><%end%>
-				<th>Nombre</th>
-				<th>Descripción</th>
-				<th>Tamaño</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @server.unsynced_packages.each do |package| %>
+<%= form_for @server, :url => sincronize_server_path do |f| -%>
+	<div id="no_synced">
+		<div class="page-header">
+			<h3>Archivos no Sincronizados</h3>
+		</div>
+		<div class="new-resource">
+		<% if @server.active? %>
+			<%= f.button  "#{content_tag(:li, '', :class => 'icon-refresh')} Sincronizar".html_safe, 
+				:class => "btn btn-small" %>
+		<% else %>
+			<%= content_tag(:h2, content_tag(:span, "Activar para sincronizar archivos", :class => "label label-important"))%>
+		<% end %>
+		</div>
+		<table class="table table-striped">
+			<thead>
 				<tr>
-					<% if @server.active? %><td><%= check_box_tag ""%></td><%end%>
-					<td><%= link_to package.file_name, package_path(package) %></td>
-					<td><%= package.name %></td>
-					<td><%= number_to_human_size(package.size) %></td>
+					<% if @server.active? %><th><%= check_box_tag "select_all_packages"%></th><%end%>
+					<th>Nombre</th>
+					<th>Descripción</th>
+					<th>Tamaño</th>
 				</tr>
-			<% end %>
-		</tbody>
-	</table>
-</div>
+			</thead>
+			<tbody>
+				<% @server.unsynced_packages.each do |package| %>
+					<tr>
+						<% if @server.active? %>
+							<td><%= check_box_tag "packages[]",  package.id, false, :class => "select_package" %></td>
+						<%end%>
+						<td><%= link_to package.file_name, package_path(package) %></td>
+						<td><%= package.name %></td>
+						<td><%= number_to_human_size(package.size) %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+<% end %>
