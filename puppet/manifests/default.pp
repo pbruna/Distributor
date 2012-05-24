@@ -33,6 +33,24 @@ class httpd {
 		ensure => present,
 	}
 	
+	file {"distributor.conf":
+		ensure => file,
+		path => "/etc/httpd/conf.d/distributor.conf",
+		owner => 'root',
+		group => 'root',
+		source => "/etc/puppet/modules/apache/files/distributor.conf",
+		notify => Service["httpd"]
+	}
+	
+	file {"httpd.conf":
+		ensure => file,
+		path => "/etc/httpd/conf/httpd.conf",
+		owner => 'root',
+		group => 'root',
+		source => "/etc/puppet/modules/apache/files/httpd.conf",
+		notify => Service["httpd"]
+	}
+	
 	service {"httpd":
 		ensure => running,
 		require => [Package["httpd"], Rvm_gemset['ruby-1.9.3-p0@rails-3.2']]

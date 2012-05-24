@@ -4,7 +4,6 @@ Distributor is a software developed with Rails for uploading and syncing files f
 
 ## TODOS
 - Documentar instalación y configuración:
-* passenger
 * compilar assets
 * configurar servidor de correo
 * Traducir mensajes FLASH que faltan
@@ -23,6 +22,14 @@ La instalación del S.O. queda fuera del alcance de esta guía, pero Distributor
 * Permita acceso HTTP/S hacia Internet, para instalación de dependencias.
 * Tenga configurado el repositorio EPEL - http://fedoraproject.org/wiki/EPEL/es
 * Se haya instalado el paquete __puppet__
+
+### Descargar Distributor
+Se debe descargar el archivo zip y luego descomprimirlo.
+La carpeta resultante tendrá dos directorios:
+
+* __distributor/__ : es el directorio de la aplicación y su contenido debe ser copiado, con __rsync__, en /var/www/distributor, y
+
+* __puppet__/ : que contiene la configuración automática y su contenido debe ser copiado en /etc/puppet
 
 ### Configuración automática con puppet
 Se debe copiar el contenido del directorio [puppet](https://github.com/pbruna/Distributor/tree/master/puppet) en el directorio /etc/puppet. El directorio /etc/puppet debería tener el siguiente contenido:
